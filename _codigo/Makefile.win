@@ -1,0 +1,36 @@
+# Project: superExponenciacao
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = exp_private.res
+OBJ      = main.o Background.o $(RES)
+LINKOBJ  = main.o Background.o $(RES)
+LIBS     = -L"C:/MinGW/lib" -L"C:/MinGW/mingw32/lib" -static-libstdc++ -static-libgcc -lallegro-5.0.10-mt -lallegro_acodec-5.0.10-mt -lallegro_audio-5.0.10-mt -lallegro_color-5.0.10-mt -lallegro_dialog-5.0.10-mt -lallegro_font-5.0.10-mt -lallegro_image-5.0.10-mt -lallegro_memfile-5.0.10-mt -lallegro_physfs-5.0.10-mt -lallegro_primitives-5.0.10-mt -lallegro_ttf-5.0.10-mt -mwindows
+INCS     = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include"
+CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include" -I"C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++"
+BIN      = superExponenciacao.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+Background.o: Background.cpp
+	$(CPP) -c Background.cpp -o Background.o $(CXXFLAGS)
+
+exp_private.res: exp_private.rc 
+	$(WINDRES) -i exp_private.rc --input-format=rc -o exp_private.res -O coff 
+
